@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PDFParser
 {
-    class DataModel
+    public class DataModel
     {
         public int Transponder  { get; set; }
         public DateTime ActionTime { get; set; }
