@@ -1,6 +1,4 @@
-﻿using org.apache.pdfbox.pdmodel;
-using org.apache.pdfbox.util;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
