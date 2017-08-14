@@ -11,25 +11,23 @@ using System.Web;
 using System.Web.Http;
 using DpParkingsParser.Models;
 using DpParkingsParser.Utilities;
+using Newtonsoft.Json;
 using PDFParser_Core;
 
 namespace DpParkingsParser.Controllers
 {
-    public class ValuesController : ApiController
+    public class MailController : ApiController
     {
         // GET api/values
-        public IEnumerable<MailgunEventItem> Get()
+        public IHttpActionResult Get()
         {
-            return RequestManager
-                .GetProductAsync(
-                    @"https://api:key-ca0046b3974b0dd8d6e79ce6f53c984d@api.mailgun.net/v3/mail.lab9k.gent/events")
-                .Result;
+            return NotFound();
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            return NotFound();
         }
 
         // POST api/values
@@ -37,14 +35,12 @@ namespace DpParkingsParser.Controllers
         public IHttpActionResult Post(FormDataCollection model)
         {
             CloudStorageManager manager = new CloudStorageManager();
-            string s = "data: \n";
 
-            foreach (var key in  model.ReadAsNameValueCollection().AllKeys)
-            {
-                s += $"{key}: {model.ReadAsNameValueCollection()[key]} \n";
-            }
-            manager.AddBlob(DataWrapper.GetModelsAsStream(s), "postdata.txt");
+            string json = model.Get("attachments");
 
+            List<Attachment> attachments = JsonConvert.DeserializeObject<List<Attachment>>(json);
+                    AttachmentHandler handler = new AttachmentHandler();
+                    handler.DownloadAndParse(attachments);
             return Ok();
         }
 

@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using DpParkingsParser.Models;
+using DpParkingsParser.Utilities;
 
 namespace DpParkingsParser
 {
@@ -22,6 +26,14 @@ namespace DpParkingsParser
                 items = await response.Content.ReadAsAsync<List<MailgunEventItem>>();
             }
             return items;
+        }
+
+        public static MemoryStream DownloadFile(string path)
+        {
+            WebClient wc = new WebClient();
+            wc.Headers.Add("Authorization", ConfigurationManager.AppSettings["authorizationKey"]);
+            return new MemoryStream(wc.DownloadData(path));
+
         }
     }
 }

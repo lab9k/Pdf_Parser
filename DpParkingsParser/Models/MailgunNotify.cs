@@ -10,4 +10,6 @@ namespace DpParkingsParser.Models
         public string From { get; set; }
         public string recipient { get; set; }
     }
+
+
 }

@@ -9,23 +9,31 @@ namespace PDFParser_Core
     {
         public string GetPdfAsString(string path)
         {
-            StringBuilder text = new StringBuilder();
-
             if (File.Exists(path))
             {
-                FileStream stream = File.Open(path,FileMode.Open);
-                PdfReader pdfReader = new PdfReader(stream);
-
-                for (int page = 1; page <= pdfReader.NumberOfPages; page++)
-                {
-                    SimpleTextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
-                    string currentText = PdfTextExtractor.GetTextFromPage(pdfReader, page, strategy);
-
-                    currentText = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(currentText)));
-                    text.Append(currentText);
-                }
-                pdfReader.Close();
+                FileStream stream = File.Open(path, FileMode.Open);
+                return GetStreamAsString(stream);
             }
+            return null;
+        }
+
+        public string GetStreamAsString(Stream stream)
+        {
+            StringBuilder text = new StringBuilder();
+
+            PdfReader pdfReader = new PdfReader(stream);
+
+            for (int page = 1; page <= pdfReader.NumberOfPages; page++)
+            {
+                SimpleTextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
+                string currentText = PdfTextExtractor.GetTextFromPage(pdfReader, page, strategy);
+
+                currentText = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default, Encoding.UTF8,
+                    Encoding.Default.GetBytes(currentText)));
+                text.Append(currentText);
+            }
+            pdfReader.Close();
+
             return text.ToString();
         }
     }
