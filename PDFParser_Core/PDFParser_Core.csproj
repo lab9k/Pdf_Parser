@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="DataFilter.cs" />
     <Compile Include="DataModel.cs" />
+    <Compile Include="DataWrapper.cs" />
+    <Compile Include="OutputFormat.cs" />
     <Compile Include="PDFReadercs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

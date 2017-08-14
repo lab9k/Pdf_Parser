@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using MultipartDataMediaFormatter;
+using MultipartDataMediaFormatter.Infrastructure;
 
 namespace DpParkingsParser
 {
@@ -10,7 +12,7 @@ namespace DpParkingsParser
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+            GlobalConfiguration.Configuration.Formatters.Add(new FormMultipartEncodedMediaTypeFormatter(new MultipartFormatterSettings()));
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -19,6 +21,7 @@ namespace DpParkingsParser
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
         }
     }
 }
