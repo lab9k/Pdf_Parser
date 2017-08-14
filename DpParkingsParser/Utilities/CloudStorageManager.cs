@@ -25,7 +25,7 @@ namespace DpParkingsParser.Utilities
             container = blobClient.GetContainerReference("dgdvobvpst01-parkingdata-dump");
         }
 
-        public void AddBlob(string path, string blobname)
+        public void AddBlob(string path, string blobname, bool overwrite = true)
         {
             using (var fileStream = System.IO.File.OpenRead(path))
             {
@@ -34,9 +34,14 @@ namespace DpParkingsParser.Utilities
 
         }
 
-        public void AddBlob(Stream stream, string blobname)
+        public void AddBlob(Stream stream, string blobname,string extension = "", bool overwrite = true)
         {
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobname);
+            int count = 1;
+            while (!overwrite && blockBlob.Exists())
+            {
+                blockBlob = container.GetBlockBlobReference($"{blobname}-{count++}{extension}");
+            }
             blockBlob.UploadFromStream(stream);
 
         }

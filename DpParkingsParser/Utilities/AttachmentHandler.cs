@@ -20,7 +20,6 @@ namespace DpParkingsParser
         }
         public void DownloadAndParse(List<Attachment> attachments)
         {
-            int count = 0;
             foreach (Attachment att in attachments)
             {
                 if (att.ContentType.Contains("pdf"))
@@ -54,7 +53,7 @@ namespace DpParkingsParser
                     MemoryStream output = DataWrapper.GetModelsAsStream(models, OutputFormat.JSON);
 
                     //Write Stream to blobstorage
-                    manager.AddBlob(output,FileNameGenerator.Generate($"json/data-{count++}.json"));
+                    manager.AddBlob(output,FileNameGenerator.Generate($"json/data"),".json",false);
 
                 }
             }
