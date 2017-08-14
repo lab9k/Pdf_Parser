@@ -32,5 +32,5 @@ PDFParser.exe inputfile [-o outputfile] [-f outputformat(CSV/JSON)]
  **Mailgun Configuration**
  
   - See [mailgun docs](http://mailgun-documentation.readthedocs.io/en/latest/quickstart-receiving.html) to setup a working incomming mail address
-  - Configure a **Store and notify** route to the application webhook at <Site-Root>/api/mail
+  - Configure a **Store and notify** route to the application webhook at [Site-Root]/api/mail
 
