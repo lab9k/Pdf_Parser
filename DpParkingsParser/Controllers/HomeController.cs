@@ -11,7 +11,7 @@ namespace DpParkingsParser.Controllers
         public ActionResult Index()
         {
 
-            return HttpNotFound();
+            return View();
         }
     }
 }

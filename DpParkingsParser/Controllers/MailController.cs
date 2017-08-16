@@ -18,19 +18,11 @@ namespace DpParkingsParser.Controllers
 {
     public class MailController : ApiController
     {
-        // GET api/values
-        public IHttpActionResult Get()
-        {
-            return NotFound();
-        }
-
-        // GET api/values/5
-        public IHttpActionResult Get(int id)
-        {
-            return NotFound();
-        }
-
-        // POST api/values
+        /// <summary>
+        /// Webhook for recieving Storage Notify Requests from mailgun
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Post(FormDataCollection model)
         {
@@ -42,16 +34,6 @@ namespace DpParkingsParser.Controllers
                     AttachmentHandler handler = new AttachmentHandler();
                     handler.DownloadAndParse(attachments);
             return Ok();
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
         }
     }
 }
