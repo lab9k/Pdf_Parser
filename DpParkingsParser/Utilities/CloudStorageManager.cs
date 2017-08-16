@@ -36,7 +36,7 @@ namespace DpParkingsParser.Utilities
 
         public void AddBlob(Stream stream, string blobname,string extension = "", bool overwrite = true)
         {
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobname);
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference($"{blobname}{extension}");
             int count = 1;
             while (!overwrite && blockBlob.Exists())
             {
