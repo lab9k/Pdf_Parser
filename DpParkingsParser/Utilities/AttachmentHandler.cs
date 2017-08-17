@@ -53,7 +53,18 @@ namespace DpParkingsParser
                     MemoryStream output = DataWrapper.GetModelsAsStream(models, OutputFormat.JSON);
 
                     //Write Stream to blobstorage
-                    manager.AddBlob(output,FileNameGenerator.Generate($"json/data"),".json",false);
+                    manager.AddBlob(output,FileNameGenerator.Generate($"json/{att.Name}"),".json",true);
+
+                    output.Close();
+                    //Create stream from list of models as JSON
+                    output = DataWrapper.GetModelsAsStream(models, OutputFormat.CSV);
+
+                    //Write Stream to blobstorage
+                    manager.AddBlob(output, FileNameGenerator.Generate($"csv/{att.Name}"), ".csv", true);
+
+                    output.Close();
+
+
 
                 }
             }

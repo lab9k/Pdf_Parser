@@ -25,7 +25,7 @@ namespace PDFParser_Core
             {
                 foreach (DataModel m in models)
                 {
-                    writer.Write(m.CSV);
+                    writer.Write(m.CSV + "\n");
                 }
             }
             else if (format == OutputFormat.JSON)
